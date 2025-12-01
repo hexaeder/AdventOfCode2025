@@ -1,0 +1,4 @@
+name = "AdventOfCode2025"
+uuid = "b43089aa-57a1-4788-b366-aa3d1b34f6ce"
+version = "0.1.0"
+authors = ["Hans Würfel <git@wuerfel.io>"]
