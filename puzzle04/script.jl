@@ -33,16 +33,28 @@ function count_neighbors(M, i)
     end
 end
 
-function count_neighbors(M)
-    accessible = 0
+function take_accessible!(M)
+    accessible = CartesianIndex{2}[]
     for ci in eachindex(IndexCartesian(), M)
         iszero(M[ci]) && continue
         nb = count_neighbors(M, ci)
         if nb < 4
-            accessible += 1
+            push!(accessible, ci)
         end
     end
-    accessible
+    M[accessible] .= 0 # take them out
+    length(accessible)
 end
 
-@show count_neighbors(M)
+function pull_iterative(M)
+    taken = 0
+    while true
+        just_taken = take_accessible!(M)
+        println("Took $just_taken free rools!")
+        iszero(just_taken) && break
+        taken += just_taken
+    end
+    taken
+end
+
+@show pull_iterative(M)
